@@ -1,0 +1,231 @@
+.tc-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg-primary) 60%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: tc-fade-in 0.3s ease-out;
+}
+
+.tc-drawer-panel {
+  width: 100%;
+  max-width: 450px;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border-color-subtle);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  animation: tc-slide-in-right 0.4s var(--ease-out-expo) both;
+}
+
+.tc-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color-subtle);
+}
+
+.tc-drawer-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.tc-drawer-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  word-break: break-all;
+}
+
+.tc-drawer-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.tc-drawer-close:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.tc-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tc-drawer-score-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-dark-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color-subtle);
+}
+
+.tc-drawer-score {
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+.tc-drawer-score-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tc-drawer-score-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tc-drawer-score-status {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.tc-drawer-section-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.tc-drawer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+.tc-drawer-list li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.tc-drawer-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+.tc-drawer-infra-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.tc-infra-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tc-infra-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tc-infra-value {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tc-infra-icon {
+  color: var(--text-muted);
+}
+
+.tc-signal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tc-signal-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tc-drawer-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color-subtle);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background: var(--bg-card);
+}
+
+.tc-btn-secondary {
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px solid var(--border-color-subtle);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tc-btn-secondary:hover {
+  background: var(--bg-card-hover);
+}
+
+.tc-btn-primary {
+  padding: 0.6rem 1.2rem;
+  background: var(--brand-royal-purple);
+  border: none;
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tc-btn-primary:hover {
+  background: var(--action-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(103, 2, 186, 0.3);
+}

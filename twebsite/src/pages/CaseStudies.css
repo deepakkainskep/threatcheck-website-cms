@@ -1,0 +1,331 @@
+.cs-hero {
+  padding: 8rem 0 3rem 0;
+  text-align: center;
+}
+
+.cs-disclaimer {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+/* Case Studies Grid */
+.cs-grid {
+  margin-bottom: 5rem;
+  gap: 1.75rem;
+}
+
+
+
+/* CaseStudiesDetail layout */
+.cs-detail-hero {
+  background: linear-gradient(135deg, rgba(103, 2, 186, 0.08) 0%, rgba(20, 20, 30, 0) 100%);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 0 4rem 0;
+}
+
+.cs-hero-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-back {
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--color-primary);
+  transform: translateX(-4px);
+}
+
+.cs-detail-header {
+  max-width: 800px;
+}
+
+.cs-company-info .badge {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.article-title {
+  font-size: 3rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.article-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.cs-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cs-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--surface-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Main Content Layout (Asymmetrical Grid) */
+.cs-main-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  margin-top: 4rem;
+  margin-bottom: 6rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .cs-main-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cs-content-story {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.cs-section {
+  position: relative;
+}
+
+.section-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.section-icon-wrap.primary {
+  background: rgba(103, 2, 186, 0.1);
+  color: var(--color-primary);
+}
+
+.cs-section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.article-paragraph {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.solution-section {
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-md);
+}
+
+/* Testimonial Blockquote */
+.cs-testimonial {
+  position: relative;
+  margin-top: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background: var(--border-color); /* subtle border in light mode */
+  padding: 1px;
+}
+
+[data-theme="dark"] .cs-testimonial {
+  padding: 2px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+.testimonial-content {
+  background: var(--bg-primary);
+  border-radius: calc(var(--radius-lg) - 1px);
+  padding: 3.5rem 3rem;
+  height: 100%;
+}
+
+[data-theme="dark"] .testimonial-content {
+  background: var(--bg-dark-secondary);
+  border-radius: calc(var(--radius-lg) - 2px);
+}
+
+.cs-testimonial-quote {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.cs-testimonial-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cs-testimonial-footer strong {
+  font-size: 1rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cs-testimonial-footer span {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Sidebar Layout */
+.cs-sidebar {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cs-sidebar-block {
+  background: var(--surface-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cs-stat-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cs-stat-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--surface-hover);
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition-fast);
+}
+
+.cs-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.cs-stat-value {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.cs-stat-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Results List Sidebar */
+.cs-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cs-results-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.check-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.cs-results-list li div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cs-results-list li strong {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.cs-results-list li p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Related */
+.cs-related {
+  margin-bottom: 6rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 4rem;
+}
+
+.related-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}

@@ -1,0 +1,69 @@
+.tc-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .tc-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .tc-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tc-metric-card {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  animation: tc-fade-up 0.5s var(--ease-out-expo) both;
+}
+
+.tc-metric-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(103, 2, 186, 0.1);
+  color: var(--brand-royal-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.25rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.tc-metric-card:hover .tc-metric-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.tc-metric-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-metric-value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.tc-metric-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

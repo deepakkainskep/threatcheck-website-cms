@@ -1,0 +1,1 @@
+export default function SimplePage({title}:{title:string}){return <section><h1>{title}</h1><div className="empty">Use the backend models and admin routes as the source of truth. This screen is ready for project-specific settings fields.</div></section>}

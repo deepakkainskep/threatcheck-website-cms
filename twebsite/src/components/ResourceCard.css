@@ -1,0 +1,120 @@
+/* ═══ Resource Card (Premium Light Theme) ═══ */
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: var(--transition-normal);
+  color: inherit;
+  height: 100%;
+  overflow: hidden;
+}
+
+.resource-content {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.resource-card:hover {
+  border-color: var(--border-color);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.resource-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.resource-card-header .badge {
+  font-size: 0.65rem;
+  padding: 0.35rem 0.65rem;
+}
+
+.resource-type-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.resource-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.resource-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.resource-card-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.resource-card:hover .resource-card-title a {
+  color: var(--color-primary);
+}
+
+.resource-card-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.resource-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color-subtle);
+}
+
+.resource-meta-size {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resource-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.resource-download-btn .arrow {
+  transition: transform var(--transition-fast);
+}
+
+.resource-card:hover .resource-download-btn {
+  color: var(--color-primary);
+}
+
+.resource-card:hover .resource-download-btn .arrow {
+  transform: translateX(4px);
+}

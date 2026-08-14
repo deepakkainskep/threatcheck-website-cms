@@ -1,0 +1,165 @@
+.pf-hero {
+  padding-bottom: 2rem !important;
+}
+
+.pf-main-title {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.pf-main-lead {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* Feature grid structure */
+.pf-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .pf-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.pf-text {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pf-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pf-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.pf-list li svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.pf-list strong {
+  color: var(--text-primary);
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.15rem;
+}
+
+.pf-list p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.pf-visual-card {
+  padding: 2.5rem;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.pf-visual-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.pf-visual-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.pf-visual-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.pf-visual-list li svg {
+  color: var(--color-primary);
+}
+
+/* ── Platform page animation upgrades ── */
+
+/* Hero title animation */
+.pf-main-title {
+  animation: tc-fade-up 0.8s var(--ease-out-expo) 0.1s both;
+}
+
+.pf-main-lead {
+  animation: tc-fade-up 0.8s var(--ease-out-expo) 0.25s both;
+}
+
+/* pf-list items stagger */
+.pf-list li {
+  animation: tc-fade-right 0.6s var(--ease-out-expo) both;
+}
+
+.pf-list li:nth-child(1) { animation-delay: 0.05s; }
+.pf-list li:nth-child(2) { animation-delay: 0.15s; }
+.pf-list li:nth-child(3) { animation-delay: 0.25s; }
+.pf-list li:nth-child(4) { animation-delay: 0.35s; }
+
+/* Section divider animated line */
+.pf-details-section {
+  position: relative;
+}
+
+.pf-details-section + .pf-details-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--color-primary);
+  opacity: 0.3;
+  border-radius: 999px;
+}
+
+/* Visual panel glow on hover */
+.pf-visual-panel,
+.pf-visual {
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.pf-visual-panel:hover,
+.pf-visual:hover {
+  box-shadow: 0 0 0 1px rgba(103,2,186,0.25), 0 20px 40px rgba(103,2,186,0.1);
+  border-color: rgba(103,2,186,0.3) !important;
+}
+

@@ -1,0 +1,208 @@
+.tc-table-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tc-table-header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color-subtle);
+}
+
+.tc-table-header h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tc-table-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.tc-table-search {
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.75rem;
+  color: var(--text-muted);
+}
+
+.tc-table-search input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  margin-left: 0.5rem;
+  outline: none;
+  font-size: 0.85rem;
+  width: 200px;
+}
+
+.tc-table-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.tc-table-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  background: var(--bg-dark-secondary);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tc-table-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(103, 2, 186, 0.4);
+}
+
+.tc-table-wrapper {
+  overflow-x: auto;
+}
+
+.tc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tc-table th {
+  padding: 1rem 1.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color-subtle);
+  background: rgba(103, 2, 186, 0.02);
+}
+
+.tc-table td {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color-subtle);
+}
+
+.tc-table tr {
+  animation: tc-fade-up 0.4s var(--ease-out-expo) both;
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.tc-table tr:hover {
+  background: var(--bg-card-hover);
+}
+
+.tc-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tc-cell-primary {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tc-cell-icon {
+  color: var(--text-muted);
+  margin-right: 0.75rem;
+}
+
+.tc-tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tc-tag-gray {
+  background: var(--bg-dark-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color-subtle);
+}
+
+.tc-tag-green {
+  background: rgba(52, 199, 119, 0.1);
+  color: var(--threat-safe);
+  border: 1px solid rgba(52, 199, 119, 0.2);
+}
+
+.tc-score-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.tc-score-safe { color: var(--threat-safe); background: rgba(52, 199, 119, 0.1); }
+.tc-score-moderate { color: var(--threat-moderate); background: rgba(245, 166, 35, 0.1); }
+.tc-score-high { color: var(--threat-high); background: rgba(219, 139, 11, 0.1); }
+.tc-score-critical { color: var(--threat-critical); background: rgba(211, 36, 43, 0.1); }
+
+.tc-table-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 3rem !important;
+}
+
+.tc-table-footer {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(103, 2, 186, 0.02);
+  border-top: 1px solid var(--border-color-subtle);
+}
+
+.tc-table-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.tc-table-pagination {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tc-table-pagination button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tc-table-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tc-table-pagination button:not(:disabled):hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(103, 2, 186, 0.4);
+}

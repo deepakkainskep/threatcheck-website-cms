@@ -1,0 +1,67 @@
+/* PlatformOverview.css */
+
+.platform-marquee-section {
+  position: relative;
+  background-color: var(--bg-primary);
+  padding: 6rem 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--border-color-subtle);
+  border-bottom: 1px solid var(--border-color-subtle);
+}
+
+.platform-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  /* Faded edges to give the disappearing effect */
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  padding: 2rem 0;
+}
+
+.platform-marquee-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: scroll-marquee 40s linear infinite;
+}
+
+.platform-marquee-text {
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  padding-right: 1.5rem;
+}
+
+.platform-marquee-subtitle {
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 1rem;
+  max-width: 600px;
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* Scrolls exactly half its width */
+}
+
+@media (max-width: 768px) {
+  .platform-marquee-section {
+    padding: 4rem 0;
+  }
+}

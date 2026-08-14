@@ -1,0 +1,145 @@
+/* ═══ Feature Card — Flat Konfirmity Style ═══ */
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: var(--transition-normal);
+  color: inherit;
+}
+
+.feature-card:hover {
+  border-color: var(--color-primary);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(103, 2, 186, 0.15);
+}
+
+.feature-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: rgba(103, 2, 186, 0.08);
+  border: 1px solid rgba(103, 2, 186, 0.15);
+  color: var(--color-primary);
+}
+
+.feature-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.feature-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  flex-grow: 1;
+}
+
+.feature-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.feature-card-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.feature-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: 0.5rem;
+  transition: var(--transition-fast);
+}
+
+.feature-card-link:hover {
+  gap: 0.6rem;
+}
+
+/* Dark section overrides */
+.dark-section .feature-card {
+  background: var(--bg-dark-secondary);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-section .feature-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dark-section .feature-card-title {
+  color: #ffffff;
+}
+
+.dark-section .feature-card-desc {
+  color: #adadad;
+}
+
+.dark-section .feature-tag {
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #6b7280;
+}
+
+/* ── Premium Animation Upgrades ── */
+
+/* Icon animate on scroll-in */
+.feature-card-icon {
+  transition: transform 0.4s var(--ease-out-back), background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover .feature-card-icon {
+  transform: rotate(-8deg) scale(1.15);
+  background: rgba(103, 2, 186, 0.14);
+  box-shadow: 0 0 16px rgba(103,2,186,0.25);
+}
+
+/* Title underline sweep on hover */
+.feature-card-title {
+  position: relative;
+  display: inline-block;
+}
+
+.feature-card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.4s var(--ease-out-expo);
+  border-radius: 999px;
+}
+
+.feature-card:hover .feature-card-title::after { width: 100%; }
+
+/* Arrow animates right on hover */
+.feature-card-link .arrow {
+  display: inline-block;
+  transition: transform 0.25s var(--ease-out-back);
+}
+.feature-card-link:hover .arrow { transform: translateX(5px); }
+

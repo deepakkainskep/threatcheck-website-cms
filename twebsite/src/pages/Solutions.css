@@ -1,0 +1,157 @@
+.solution-hero {
+  padding-bottom: 2.5rem !important;
+}
+
+.solution-category-badge {
+  margin-bottom: 1rem;
+}
+
+.solution-main-title {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.solution-main-lead {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* Breakdown Grid */
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.breakdown-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.solution-metric-box {
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sol-metric-num {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.sol-metric-lbl {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  max-width: 240px;
+}
+
+.solution-checkpoints-card {
+  padding: 2rem;
+}
+
+.checkpoints-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 0.75rem;
+}
+
+.checkpoints-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.checkpoints-list li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Detailed Points */
+.breakdown-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.breakdown-details h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.solution-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.solution-point-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.point-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary-rgb);
+  background-color: rgba(184, 125, 232, 0.05);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.point-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.point-text strong {
+  color: var(--text-primary);
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}

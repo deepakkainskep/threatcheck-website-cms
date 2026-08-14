@@ -1,0 +1,111 @@
+.tc-timeline-container {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+}
+
+.tc-timeline-header {
+  margin-bottom: 1.5rem;
+}
+
+.tc-timeline-header h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tc-timeline-list {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+}
+
+.tc-timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  padding-bottom: 1.5rem;
+  animation: tc-fade-up 0.5s var(--ease-out-expo) both;
+}
+
+.tc-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.tc-timeline-line {
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color-subtle);
+}
+
+.tc-timeline-item:last-child .tc-timeline-line {
+  display: none;
+}
+
+.tc-timeline-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  z-index: 1;
+  transition: var(--transition-fast);
+}
+
+.tc-timeline-item:hover .tc-timeline-marker {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.tc-timeline-item.highlight .tc-timeline-marker {
+  background: rgba(219, 139, 11, 0.1);
+  border-color: var(--threat-high);
+  color: var(--threat-high);
+}
+
+.tc-timeline-content {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-subtle);
+  transition: var(--transition-fast);
+}
+
+.tc-timeline-item:hover .tc-timeline-content {
+  background: var(--bg-card-hover);
+  border-color: rgba(103, 2, 186, 0.3);
+}
+
+.tc-timeline-time {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.tc-timeline-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.tc-timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}

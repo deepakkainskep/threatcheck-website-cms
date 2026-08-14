@@ -1,0 +1,201 @@
+/* ═══ Contact Page (Konfirmity-Inspired) ═══ */
+.contact-page {
+  padding: 6rem 2rem 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 4rem 1.25rem;
+  }
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ── Left Side: Contact Channels ── */
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.channel-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
+}
+
+.channel-box:hover {
+  border-color: var(--border-color);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.channel-icon-container {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(103, 2, 186, 0.08);
+  border: 1px solid rgba(103, 2, 186, 0.15);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Colors for specific icons */
+.channel-box:nth-child(2) .channel-icon-container {
+  background: rgba(108, 43, 217, 0.08);
+  border-color: rgba(108, 43, 217, 0.15);
+  color: var(--color-secondary);
+}
+
+.channel-box:nth-child(3) .channel-icon-container {
+  background: rgba(15, 23, 41, 0.05);
+  border-color: rgba(15, 23, 41, 0.1);
+  color: var(--color-accent);
+}
+
+.channel-box h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.channel-box p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.channel-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: var(--transition-fast);
+}
+
+.channel-link:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.channel-address {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-style: normal;
+  line-height: 1.5;
+}
+
+/* ── Right Side: Submission Form ── */
+.contact-form-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 576px) {
+  .contact-form-wrapper {
+    padding: 1.5rem;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.input-error {
+  border-color: var(--color-danger) !important;
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.error-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-danger);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.text-area {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  margin-top: 0.5rem;
+  justify-content: center;
+  padding: 0.85rem;
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success Banner ── */
+.contact-success-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  gap: 1rem;
+}
+
+.success-icon {
+  margin-bottom: 0.5rem;
+}
+
+.contact-success-banner h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.contact-success-banner p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 400px;
+}

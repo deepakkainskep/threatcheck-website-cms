@@ -1,0 +1,56 @@
+/* ═══ Section Header ═══ */
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header.align-left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.section-header .badge {
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Staggered animation states ── */
+.sh-animated .sh-badge {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+  transition-delay: 0ms;
+}
+.sh-animated .sh-title {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  transition-delay: 100ms;
+}
+.sh-animated .sh-subtitle {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+  transition-delay: 220ms;
+}
+
+.sh-visible .sh-badge,
+.sh-visible .sh-title,
+.sh-visible .sh-subtitle {
+  opacity: 1;
+  transform: none;
+}
+

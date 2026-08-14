@@ -1,0 +1,84 @@
+.glow-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating particles */
+.gp-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--brand-royal-purple);
+  animation: tc-particle-float var(--duration, 6s) ease-in-out infinite;
+}
+
+[data-theme="dark"] .gp-dot {
+  background: var(--purple-300);
+}
+
+/* Grid overlay */
+.gp-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(103, 2, 186, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 2, 186, 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+[data-theme="dark"] .gp-grid-overlay {
+  background-image:
+    linear-gradient(rgba(184, 125, 232, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 125, 232, 0.08) 1px, transparent 1px);
+}
+
+/* Glow orbs */
+.gp-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.gp-orb-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(103,2,186,0.12) 0%, transparent 70%);
+  animation: tc-float-y 8s ease-in-out infinite;
+}
+
+.gp-orb-2 {
+  width: 300px;
+  height: 300px;
+  bottom: 0;
+  left: 10%;
+  background: radial-gradient(circle, rgba(28,11,117,0.1) 0%, transparent 70%);
+  animation: tc-float-y 10s ease-in-out 2s infinite;
+}
+
+.gp-orb-3 {
+  width: 200px;
+  height: 200px;
+  top: 40%;
+  left: 50%;
+  background: radial-gradient(circle, rgba(154,77,219,0.08) 0%, transparent 70%);
+  animation: tc-float-y-sm 6s ease-in-out 1s infinite;
+}
+
+[data-theme="dark"] .gp-orb-1 {
+  background: radial-gradient(circle, rgba(184,125,232,0.18) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .gp-orb-2 {
+  background: radial-gradient(circle, rgba(103,2,186,0.15) 0%, transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gp-dot,
+  .gp-orb { animation: none !important; }
+}

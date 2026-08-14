@@ -1,0 +1,111 @@
+.tc-breakdown-container {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tc-breakdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.tc-breakdown-header h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tc-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tc-signal-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color-subtle);
+  transition: var(--transition-fast);
+  animation: tc-slide-in-right 0.4s var(--ease-out-expo) both;
+}
+
+.tc-signal-item:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(103, 2, 186, 0.4);
+}
+
+.tc-signal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.tc-risk-safe { background: rgba(52, 199, 119, 0.1); color: var(--threat-safe); }
+.tc-risk-low { background: rgba(75, 140, 240, 0.1); color: var(--threat-low); }
+.tc-risk-moderate { background: rgba(245, 166, 35, 0.1); color: var(--threat-moderate); }
+.tc-risk-high { background: rgba(219, 139, 11, 0.1); color: var(--threat-high); }
+.tc-risk-critical { background: rgba(211, 36, 43, 0.1); color: var(--threat-critical); }
+
+.tc-text-safe { color: var(--threat-safe); }
+.tc-text-low { color: var(--threat-low); }
+.tc-text-moderate { color: var(--threat-moderate); }
+.tc-text-high { color: var(--threat-high); }
+.tc-text-critical { color: var(--threat-critical); }
+
+.tc-signal-content {
+  flex: 1;
+}
+
+.tc-signal-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.tc-signal-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.tc-signal-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tc-signal-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.tc-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tc-skeleton-item {
+  height: 70px;
+  border-radius: var(--radius-md);
+  background: var(--bg-dark-secondary);
+  animation: tc-pulse-ring 2s infinite;
+  opacity: 0.5;
+}
