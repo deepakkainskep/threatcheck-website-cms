@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Shield, Check, CheckCircle2, Calendar, Clock, ArrowRight, Loader2, User, Building, Mail, ChevronRight } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import ScrollReveal from '../components/ScrollReveal';
+import { apiService } from '../services/api';
 import './RequestDemo.css';
 
 export default function RequestDemo() {
@@ -72,7 +73,7 @@ export default function RequestDemo() {
     }, 1200);
   };
 
-  const handleScheduleConfirm = (e) => {
+  const handleScheduleConfirm = async (e) => {
     e.preventDefault();
     if (!selectedTime) {
       alert('Please select a time slot to confirm.');
@@ -80,10 +81,19 @@ export default function RequestDemo() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await apiService.postDemoRequest({
+        ...formData,
+        selectedDate,
+        selectedTime,
+      });
       setStep(3);
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to book demo. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -3,6 +3,7 @@ import { Mail, MessageSquare, Phone, Globe, CheckCircle2, Loader2, ArrowRight } 
 import SectionHeader from '../components/SectionHeader';
 import ScrollReveal from '../components/ScrollReveal';
 import PremiumHero from '../components/PremiumHero';
+import { apiService } from '../services/api';
 import './Contact.css';
 
 export default function Contact() {
@@ -24,7 +25,7 @@ export default function Contact() {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
 
@@ -46,8 +47,8 @@ export default function Contact() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await apiService.postContact(formData);
       setSubmitted(true);
       setFormData({ name: '', email: '', subject: 'sales', message: '' });
       
@@ -55,7 +56,16 @@ export default function Contact() {
       setTimeout(() => {
         setSubmitted(false);
       }, 6000);
-    }, 1200);
+    } catch (err) {
+      console.error(err);
+      if (err.data && err.data.error) {
+        setErrors({ submit: err.data.error });
+      } else {
+        setErrors({ submit: 'Failed to send message. Please try again.' });
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -173,6 +183,8 @@ export default function Contact() {
                 />
                 {errors.message && <span className="error-hint">{errors.message}</span>}
               </div>
+
+              {errors.submit && <div className="error-hint" style={{ marginBottom: '1rem', color: 'var(--status-critical-fg)', fontWeight: 500 }}>{errors.submit}</div>}
 
               <button type="submit" className="btn btn-primary w-full submit-btn" disabled={loading}>
                 {loading ? (

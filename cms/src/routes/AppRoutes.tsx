@@ -6,6 +6,8 @@ import Dashboard from "../pages/Dashboard";
 import ContentPage from "../pages/ContentPage";
 import Media from "../pages/Media";
 import Users from "../pages/Users";
+import Contacts from "../pages/Contacts";
+import DemoRequests from "../pages/DemoRequests";
 import { currentUser } from "../store/authStore";
 
 const Guard = ({ children, role }: { children: React.ReactNode; role?: string }) => {
@@ -35,6 +37,8 @@ export default function AppRoutes() {
         <Route path="/integrations" element={<ContentPage type="integrations" />} />
         <Route path="/frameworks" element={<ContentPage type="frameworks" />} />
         <Route path="/media" element={<Media />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/demo-requests" element={<DemoRequests />} />
         <Route
           path="/users"
           element={

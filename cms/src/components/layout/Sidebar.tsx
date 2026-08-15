@@ -10,6 +10,8 @@ import {
   LockKeyhole,
   ShieldCheck,
   Users,
+  MessageSquare,
+  Calendar,
   X,
 } from "lucide-react";
 import { currentUser } from "../../store/authStore";
@@ -68,6 +70,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
             {label}
           </NavLink>
         ))}
+      </nav>
+
+      <nav className="navSection">
+        <div className="navTitle">Lead Generation</div>
+        <NavLink to="/demo-requests" onClick={onClose}>
+          <Calendar size={18} />
+          Demo Requests
+        </NavLink>
+        <NavLink to="/contacts" onClick={onClose}>
+          <MessageSquare size={18} />
+          Contacts
+        </NavLink>
       </nav>
 
       <nav className="navSection">

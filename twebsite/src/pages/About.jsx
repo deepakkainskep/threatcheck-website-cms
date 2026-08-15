@@ -5,6 +5,7 @@ import SectionHeader from '../components/SectionHeader';
 import CTA from '../components/CTA';
 import ScrollReveal from '../components/ScrollReveal';
 import PremiumHero from '../components/PremiumHero';
+import originImage from '../assets/origin.jpg';
 import './About.css';
 
 export default function About() {
@@ -88,13 +89,8 @@ export default function About() {
       <section className="about-story section-padding">
         <div className="container story-grid">
           <ScrollReveal variant="fade-right">
-            <div className="story-image-panel glass-panel">
-              <div className="story-blueprint">
-                <div className="bp-grid-node node-1"></div>
-                <div className="bp-grid-node node-2"></div>
-                <div className="bp-grid-line"></div>
-                <span className="bp-text">Continuous Posture Registry</span>
-              </div>
+            <div className="story-image-panel glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
+              <img src={originImage} alt="Our Origin Story" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </ScrollReveal>
           <ScrollReveal variant="fade-left" delay={150}>

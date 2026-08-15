@@ -4,7 +4,7 @@
   background: color-mix(in srgb, var(--bg-primary) 60%, transparent);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 1000;
+  z-index: 9999;
   display: flex;
   justify-content: flex-end;
   animation: tc-fade-in 0.3s ease-out;
