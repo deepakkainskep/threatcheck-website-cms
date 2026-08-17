@@ -1,5 +1,12 @@
 import { Schema } from "mongoose";
 export const statusValues = ["DRAFT", "PUBLISHED"] as const;
+
+/** Fields required for the draft/publish versioning workflow.
+ *  Include in every content model schema to prevent Mongoose strict mode from stripping them. */
+export const versioningFields = {
+  originalId: { type: String, default: null },
+  hasDraft: { type: Boolean, default: false },
+};
 export const seoSchema = new Schema(
   {
     title: String,

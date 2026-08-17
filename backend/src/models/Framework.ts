@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { seoSchema, statusValues } from "./common.js";
+import { seoSchema, statusValues, versioningFields } from "./common.js";
 const schema = new Schema(
   {
     name: { type: String, required: true },
@@ -10,6 +10,7 @@ const schema = new Schema(
     status: { type: String, enum: statusValues, default: "DRAFT" },
     displayOrder: { type: Number, default: 0 },
     seo: seoSchema,
+    ...versioningFields,
   },
   { timestamps: true },
 );

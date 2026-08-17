@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { seoSchema, statusValues } from "./common.js";
+import { seoSchema, statusValues, versioningFields } from "./common.js";
 const schema = new Schema(
   {
     type: String,
@@ -18,6 +18,7 @@ const schema = new Schema(
     status: { type: String, enum: statusValues, default: "DRAFT" },
     seo: seoSchema,
     publishedAt: Date,
+    ...versioningFields,
   },
   { timestamps: true },
 );

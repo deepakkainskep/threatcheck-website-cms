@@ -12,6 +12,7 @@ import {
   FileText,
   Tag,
   ImageIcon,
+  UploadCloud,
 } from "lucide-react";
 import { api } from "../services/api";
 import { useToast } from "../context/ToastContext";
@@ -58,6 +59,8 @@ export default function ContentPage({ type }: { type: string }) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeTab, setActiveTab] = useState<"general" | "blocks" | "media">("general");
+  const [publishingAll, setPublishingAll] = useState(false);
+  const [draftCount, setDraftCount] = useState(0);
 
   const toast = useToast();
 
@@ -76,6 +79,12 @@ export default function ContentPage({ type }: { type: string }) {
       });
       setItems(data.data || []);
       setTotalPages(data.pagination?.totalPages || 1);
+
+      // Independently track how many drafts exist (for button state)
+      const { data: draftData } = await api.get(`/admin/${type}`, {
+        params: { status: "DRAFT", limit: 1, page: 1 },
+      });
+      setDraftCount(draftData.pagination?.total ?? 0);
     } catch {
       toast.error(`Failed to load ${labels[type]}`);
     } finally {
@@ -137,6 +146,19 @@ export default function ContentPage({ type }: { type: string }) {
     }
   };
 
+  const handlePublishAllDrafts = async () => {
+    setPublishingAll(true);
+    try {
+      const { data } = await api.patch(`/admin/${type}/publish-all-drafts`);
+      toast.success(`Published ${data.data?.published ?? 0} draft(s) successfully!`);
+      loadItems();
+    } catch {
+      toast.error("Failed to publish all drafts");
+    } finally {
+      setPublishingAll(false);
+    }
+  };
+
   const isArticle = ["blogs", "insights"].includes(type);
   const isResource = type === "resources";
   const isCase = type === "case-studies";
@@ -167,6 +189,31 @@ export default function ContentPage({ type }: { type: string }) {
         </div>
 
         <div className="filterGroup">
+          {/* Publish All Drafts button — active purple when drafts exist, muted when none */}
+          <button
+            onClick={handlePublishAllDrafts}
+            disabled={publishingAll || draftCount === 0}
+            title={draftCount > 0 ? `Publish all ${draftCount} pending draft(s)` : "No pending drafts to publish"}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              background: draftCount > 0 ? "var(--brand-accent)" : "var(--surface-sunken, #e5e7eb)",
+              color: draftCount > 0 ? "#fff" : "var(--text-muted, #9ca3af)",
+              border: "1.5px solid " + (draftCount > 0 ? "var(--brand-accent)" : "var(--border-subtle, #d1d5db)"),
+              padding: "8px 14px",
+              borderRadius: "8px",
+              fontWeight: 600,
+              fontSize: "13px",
+              cursor: (publishingAll || draftCount === 0) ? "not-allowed" : "pointer",
+              opacity: publishingAll ? 0.7 : 1,
+              transition: "background 0.2s, color 0.2s, border-color 0.2s",
+            }}
+          >
+            {publishingAll
+              ? <><Loader2 size={15} className="spin" style={{ animation: "spin 1s linear infinite" }} /> Publishing...</>
+              : <><UploadCloud size={15} /> Publish All Drafts{draftCount > 0 ? ` (${draftCount})` : ""}</>}
+          </button>
           <select
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
