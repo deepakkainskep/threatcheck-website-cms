@@ -1,22 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import { motion } from 'framer-motion';
 import GlowParticles from './GlowParticles';
 import './PremiumHero.css';
 
-const renderAnimatedWords = (text, delayOffset) => {
-  if (!text) return null;
-  const words = text.split(' ');
-  return words.map((word, i) => (
-    <span
-      key={i}
-      className="tc-animated-word"
-      style={{ animationDelay: `${delayOffset + (i * 0.08)}s` }}
-    >
-      {word}&nbsp;
-    </span>
-  ));
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+  }
 };
 
 export default function PremiumHero({
@@ -38,43 +41,42 @@ export default function PremiumHero({
         <div className="premium-hero-glow premium-hero-glow-secondary"></div>
       </div>
       
-      <div className="container premium-hero-content">
-        <ScrollReveal variant="fade-up" delay={50}>
-          <div className="premium-hero-label">
-            {label}
-          </div>
-        </ScrollReveal>
+      <motion.div 
+        className="container premium-hero-content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={itemVariants} className="premium-hero-label">
+          {label}
+        </motion.div>
 
-        <h1 className="premium-hero-title">
-          <span className="title-line-1 d-block tc-word-reveal-wrapper">
-            {renderAnimatedWords(titleLine1, 0.1)}
+        <motion.h1 variants={itemVariants} className="premium-hero-title">
+          <span className="title-line-1 d-block">
+            {titleLine1}
           </span>
           {titleLine2 && (
-            <span className="title-line-2 d-block tc-word-reveal-wrapper">
-              {renderAnimatedWords(titleLine2, 0.1 + (titleLine1.split(' ').length * 0.08) + 0.1)}
+            <span className="title-line-2 d-block">
+              {titleLine2}
             </span>
           )}
-        </h1>
+        </motion.h1>
 
-        <ScrollReveal variant="fade-up" delay={350}>
-          <p className="premium-hero-desc">
-            {description}
-          </p>
-        </ScrollReveal>
+        <motion.p variants={itemVariants} className="premium-hero-desc">
+          {description}
+        </motion.p>
 
-        <ScrollReveal variant="fade-up" delay={450}>
-          <div className="premium-hero-actions">
-            <Link to={primaryButtonLink} className="btn btn-primary tc-magnetic">
-              {primaryButtonText} <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+        <motion.div variants={itemVariants} className="premium-hero-actions">
+          <Link to={primaryButtonLink} className="btn btn-primary tc-magnetic">
+            {primaryButtonText} <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+          </Link>
+          {secondaryButtonText && secondaryButtonLink && (
+            <Link to={secondaryButtonLink} className="btn btn-secondary tc-magnetic">
+              {secondaryButtonText}
             </Link>
-            {secondaryButtonText && secondaryButtonLink && (
-              <Link to={secondaryButtonLink} className="btn btn-secondary tc-magnetic">
-                {secondaryButtonText}
-              </Link>
-            )}
-          </div>
-        </ScrollReveal>
-      </div>
+          )}
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

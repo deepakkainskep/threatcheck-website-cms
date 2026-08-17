@@ -1,9 +1,74 @@
-import { Router } from "express";import bcrypt from"bcryptjs";import{User}from"../models/User.js";import{validate}from"../middlewares/validation.middleware.js";import{login}from"../validators/schemas.js";import{verifyPassword,hashPassword}from"../utils/password.js";import{signAccess,signRefresh,verifyRefresh}from"../utils/jwt.js";import{ok}from"../utils/response.js";import{AppError}from"../middlewares/error.middleware.js";import{requireAuth}from"../middlewares/auth.middleware.js";import{authLimiter}from"../middlewares/rateLimit.middleware.js";
-const r=Router();
-r.post("/login",authLimiter,validate(login),async(req,res,next)=>{try{const u=await User.findOne({email:req.body.email});if(!u||u.disabled||!await verifyPassword(req.body.password,u.passwordHash))throw new AppError(401,"Invalid credentials");const accessToken=signAccess({sub:u._id,role:u.role});const refreshToken=signRefresh({sub:u._id});u.refreshTokenHash=await hashPassword(refreshToken);u.lastLoginAt=new Date();await u.save();ok(res,{accessToken,refreshToken,user:{id:u._id,name:u.name,email:u.email,role:u.role}})}catch(e){next(e)}});
-r.post("/refresh",async(req,res,next)=>{try{const token=req.body.refreshToken;if(!token)throw new AppError(401,"Refresh token required");const p=verifyRefresh(token);const u=await User.findById(p.sub);if(!u?.refreshTokenHash||!await bcrypt.compare(token,u.refreshTokenHash))throw new AppError(401,"Invalid refresh token");ok(res,{accessToken:signAccess({sub:u._id,role:u.role})})}catch(e){next(new AppError(401,"Invalid refresh token"))}});
-r.post("/logout",requireAuth,async(req,res,next)=>{try{await User.findByIdAndUpdate(req.user._id,{$unset:{refreshTokenHash:1}});ok(res,{loggedOut:true})}catch(e){next(e)}});
-r.get("/me",requireAuth,(req,res)=>ok(res,req.user));
-r.post("/forgot-password",(req,res)=>ok(res,{message:"Password reset flow must be connected to an email provider."}));
-r.post("/reset-password",(req,res)=>ok(res,{message:"Reset token handling placeholder endpoint is disabled until email provider setup."}));
+import { Router } from "express";
+import bcrypt from "bcryptjs";
+import { User } from "../models/User.js";
+import { validate } from "../middlewares/validation.middleware.js";
+import { login } from "../validators/schemas.js";
+import { verifyPassword, hashPassword } from "../utils/password.js";
+import { signAccess, signRefresh, verifyRefresh } from "../utils/jwt.js";
+import { ok } from "../utils/response.js";
+import { AppError } from "../middlewares/error.middleware.js";
+import { requireAuth } from "../middlewares/auth.middleware.js";
+import { authLimiter } from "../middlewares/rateLimit.middleware.js";
+const r = Router();
+r.post("/login", authLimiter, validate(login), async (req, res, next) => {
+  try {
+    const u = await User.findOne({ email: req.body.email });
+    if (
+      !u ||
+      u.disabled ||
+      !(await verifyPassword(req.body.password, u.passwordHash))
+    )
+      throw new AppError(401, "Invalid credentials");
+    const accessToken = signAccess({ sub: u._id, role: u.role });
+    const refreshToken = signRefresh({ sub: u._id });
+    u.refreshTokenHash = await hashPassword(refreshToken);
+    u.lastLoginAt = new Date();
+    await u.save();
+    ok(res, {
+      accessToken,
+      refreshToken,
+      user: { id: u._id, name: u.name, email: u.email, role: u.role },
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+r.post("/refresh", async (req, res, next) => {
+  try {
+    const token = req.body.refreshToken;
+    if (!token) throw new AppError(401, "Refresh token required");
+    const p = verifyRefresh(token);
+    const u = await User.findById(p.sub);
+    if (
+      !u?.refreshTokenHash ||
+      !(await bcrypt.compare(token, u.refreshTokenHash))
+    )
+      throw new AppError(401, "Invalid refresh token");
+    ok(res, { accessToken: signAccess({ sub: u._id, role: u.role }) });
+  } catch (e) {
+    next(new AppError(401, "Invalid refresh token"));
+  }
+});
+r.post("/logout", requireAuth, async (req, res, next) => {
+  try {
+    await User.findByIdAndUpdate(req.user._id, {
+      $unset: { refreshTokenHash: 1 },
+    });
+    ok(res, { loggedOut: true });
+  } catch (e) {
+    next(e);
+  }
+});
+r.get("/me", requireAuth, (req, res) => ok(res, req.user));
+r.post("/forgot-password", (req, res) =>
+  ok(res, {
+    message: "Password reset flow must be connected to an email provider.",
+  }),
+);
+r.post("/reset-password", (req, res) =>
+  ok(res, {
+    message:
+      "Reset token handling placeholder endpoint is disabled until email provider setup.",
+  }),
+);
 export default r;

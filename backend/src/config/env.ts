@@ -14,5 +14,6 @@ export const env = {
   maxFileSize: Number(process.env.MAX_FILE_SIZE || 5 * 1024 * 1024),
   azureStorageAccountName: process.env.AZURE_STORAGE_ACCOUNT_NAME || "",
   azureStorageAccountKey: process.env.AZURE_STORAGE_ACCOUNT_KEY || "",
-  azureStorageContainerName: process.env.AZURE_STORAGE_CONTAINER_NAME || "threatcheck-media"
+  azureStorageContainerName:
+    process.env.AZURE_STORAGE_CONTAINER_NAME || "threatcheck-media",
 };

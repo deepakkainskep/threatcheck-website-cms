@@ -43,13 +43,20 @@
   pointer-events: none;
 }
 
+@keyframes slowDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-2%, 3%) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
 .gp-orb-1 {
   width: 400px;
   height: 400px;
   top: -100px;
   right: -100px;
   background: radial-gradient(circle, rgba(103,2,186,0.12) 0%, transparent 70%);
-  animation: tc-float-y 8s ease-in-out infinite;
+  animation: slowDrift 20s infinite ease-in-out;
+  will-change: transform;
 }
 
 .gp-orb-2 {
@@ -58,7 +65,8 @@
   bottom: 0;
   left: 10%;
   background: radial-gradient(circle, rgba(28,11,117,0.1) 0%, transparent 70%);
-  animation: tc-float-y 10s ease-in-out 2s infinite;
+  animation: slowDrift 25s infinite ease-in-out 2s reverse;
+  will-change: transform;
 }
 
 .gp-orb-3 {

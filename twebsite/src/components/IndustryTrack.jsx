@@ -8,33 +8,33 @@ import './IndustryTrack.css';
 
 const industries = [
   {
-    title: 'Industrial',
-    desc: 'ICS/OT & IEC 62443',
+    title: 'Enterprise',
+    desc: 'Security Risk & Compliance',
     image: imgIndustrial
   },
   {
-    title: 'Connected Devices',
-    desc: 'IoT & Embedded Security',
+    title: 'Technology',
+    desc: 'Product & Application Security',
     image: imgConnected
   },
   {
-    title: 'Automotive',
-    desc: 'Connected Vehicle Security',
+    title: 'Financial Services',
+    desc: 'Cyber Risk & Regulatory Compliance',
     image: imgAutomotive
   },
   {
-    title: 'Medical Devices',
-    desc: 'Healthcare IoT Security',
-    image: imgConnected
-  },
-  {
-    title: 'Government',
-    desc: 'Defense & Aerospace',
+    title: 'Manufacturing',
+    desc: 'Industrial Security & Compliance',
     image: imgIndustrial
   },
+  // {
+  //   title: 'Retail & E-commerce',
+  //   desc: 'Data Protection & Security',
+  //   image: imgIndustrial
+  // },
   {
     title: 'Energy & Utilities',
-    desc: 'Critical Infrastructure',
+    desc: 'Critical Infrastructure Security',
     image: imgAutomotive
   }
 ];
@@ -42,7 +42,7 @@ const industries = [
 export default function IndustryTrack() {
   // Duplicate array for seamless infinite scrolling (4 sets to be safe with lerping)
   const trackItems = [...industries, ...industries, ...industries, ...industries];
-  
+
   const trackRef = React.useRef(null);
   const scrollPos = React.useRef(0);
   const targetPos = React.useRef(0);
@@ -69,7 +69,7 @@ export default function IndustryTrack() {
 
       // Infinite loop logic (1 set = scrollWidth / 4)
       const setWidth = track.scrollWidth / 4;
-      
+
       if (Math.abs(scrollPos.current) >= setWidth * 2) {
         scrollPos.current += setWidth;
         targetPos.current += setWidth;
@@ -96,7 +96,7 @@ export default function IndustryTrack() {
   };
 
   const handleScrollRight = () => {
-    targetPos.current -= 360; 
+    targetPos.current -= 360;
   };
 
   return (
@@ -112,7 +112,7 @@ export default function IndustryTrack() {
               Designed for high-growth teams shipping in high-stakes environments where continuous security, compliance, and defensible audit proof all matter.
             </p>
           </div>
-          
+
           <div className="industry-track-controls">
             <button className="industry-nav-btn" aria-label="Previous" onClick={handleScrollLeft}>
               <ChevronLeft size={20} />

@@ -1,3 +1,28 @@
-import { RequestHandler } from "express";import { User } from "../models/User.js";import{verifyAccess}from"../utils/jwt.js";import{AppError}from"./error.middleware.js";
-declare global{namespace Express{interface Request{user?:any}}}
-export const requireAuth:RequestHandler=async(req,res,next)=>{try{const h=req.headers.authorization;if(!h?.startsWith("Bearer "))throw new AppError(401,"Authentication required");const p=verifyAccess(h.slice(7));const user=await User.findById(p.sub).select("-passwordHash -refreshTokenHash");if(!user||user.disabled)throw new AppError(401,"Authentication required");req.user=user;next();}catch(e){next(new AppError(401,"Authentication required"))}};
+import { RequestHandler } from "express";
+import { User } from "../models/User.js";
+import { verifyAccess } from "../utils/jwt.js";
+import { AppError } from "./error.middleware.js";
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
+export const requireAuth: RequestHandler = async (req, res, next) => {
+  try {
+    const h = req.headers.authorization;
+    if (!h?.startsWith("Bearer "))
+      throw new AppError(401, "Authentication required");
+    const p = verifyAccess(h.slice(7));
+    const user = await User.findById(p.sub).select(
+      "-passwordHash -refreshTokenHash",
+    );
+    if (!user || user.disabled)
+      throw new AppError(401, "Authentication required");
+    req.user = user;
+    next();
+  } catch (e) {
+    next(new AppError(401, "Authentication required"));
+  }
+};

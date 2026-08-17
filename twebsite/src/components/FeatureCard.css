@@ -16,8 +16,8 @@
 .feature-card:hover {
   border-color: var(--color-primary);
   background: var(--bg-card-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px -10px rgba(103, 2, 186, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .feature-card-icon {

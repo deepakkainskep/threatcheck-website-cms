@@ -419,6 +419,16 @@ a {
   color: var(--gray-0);
   border-color: var(--brand-royal-purple);
   box-shadow: 0 4px 14px rgba(103, 2, 186, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn-primary:hover {
@@ -427,6 +437,10 @@ a {
   border-color: var(--brand-royal-purple);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(103, 2, 186, 0.15);
+}
+
+.btn-primary:hover::after {
+  left: 100%;
 }
 
 [data-theme="dark"] .btn-primary {

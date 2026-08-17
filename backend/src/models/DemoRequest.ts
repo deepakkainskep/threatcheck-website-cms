@@ -13,6 +13,6 @@ export const DemoRequest = mongoose.model(
       selectedDate: { type: String },
       selectedTime: { type: String },
     },
-    { timestamps: true }
-  )
+    { timestamps: true },
+  ),
 );

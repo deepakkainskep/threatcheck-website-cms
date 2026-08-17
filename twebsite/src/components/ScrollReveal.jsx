@@ -1,96 +1,92 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import './ScrollReveal.css';
 
-/**
- * Upgraded ScrollReveal — supports multiple animation variants,
- * staggered children, custom delay/duration, and threshold control.
- *
- * Props:
- *  variant: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale-in' | 'scale-up' | 'rotate-in'
- *  delay:   number (ms, default 0)
- *  stagger: boolean — applies .sr-stagger to animate children with 80ms offsets
- *  threshold: 0–1 (default 0.12)
- *  once:    boolean (default true) — only animate in once
- *  className: extra classes
- */
+// Map existing CSS-based variants to Framer Motion variants
+const variantsMap = {
+  'fade-up': { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } },
+  'fade-down': { hidden: { opacity: 0, y: -40 }, visible: { opacity: 1, y: 0 } },
+  'fade-left': { hidden: { opacity: 0, x: 48 }, visible: { opacity: 1, x: 0 } },
+  'fade-right': { hidden: { opacity: 0, x: -48 }, visible: { opacity: 1, x: 0 } },
+  'scale-in': { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } },
+  'scale-up': { hidden: { opacity: 0, scale: 0.92, y: 24 }, visible: { opacity: 1, scale: 1, y: 0 } },
+  'rotate-in': { hidden: { opacity: 0, rotate: -8, scale: 0.9 }, visible: { opacity: 1, rotate: 0, scale: 1 } },
+};
+
 export default function ScrollReveal({
   children,
   className = '',
   variant = 'fade-up',
   delay = 0,
-  duration,
+  duration = 0.6,
   stagger = false,
   threshold = 0.12,
   once = true,
   parallax = false,
   parallaxSpeed = 0.05
 }) {
-  const ref = useRef(null);
+  const [parallaxY, setParallaxY] = useState(0);
+  const selectedVariant = variantsMap[variant] || variantsMap['fade-up'];
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    // Apply initial class
-    el.classList.add(`sr-${variant}`);
-    if (stagger) el.classList.add('sr-stagger');
-    if (delay) el.style.transitionDelay = `${delay}ms`;
-    if (duration) el.style.transitionDuration = `${duration}ms`;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.classList.add('sr-visible');
-            if (once) observer.unobserve(el);
-          } else if (!once) {
-            el.classList.remove('sr-visible');
-          }
-        });
-      },
-      { threshold }
-    );
-
-    observer.observe(el);
-
-    // Parallax logic
+    if (!parallax) return;
+    
     let rafId;
     const handleScroll = () => {
-      if (!parallax) return;
       rafId = requestAnimationFrame(() => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        // Calculate offset based on distance from center of screen
-        const centerOffset = (rect.top + rect.height / 2) - (window.innerHeight / 2);
-        const yMove = centerOffset * parallaxSpeed;
-
-        // We only want to transform the Y axis without overriding the reveal animation completely
-        // To play nice with sr-visible which removes transform, we will apply this to a child wrapper
-        // But since we can't easily inject a wrapper without breaking styles, we apply it via custom property
-        el.style.setProperty('--parallax-y', `${yMove}px`);
+        // Simple parallax approximation based on scroll
+        const scrollY = window.scrollY;
+        // The further you scroll, the more it moves. This is a very basic proxy 
+        // to keep it lightweight without needing a ref to the exact element position.
+        setParallaxY(scrollY * parallaxSpeed);
       });
     };
 
-    if (parallax) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); // Initial check
-    }
-
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    
     return () => {
-      observer.disconnect();
-      if (parallax) {
-        window.removeEventListener('scroll', handleScroll);
-        cancelAnimationFrame(rafId);
-      }
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
     };
-  }, [variant, delay, duration, stagger, threshold, once, parallax, parallaxSpeed]);
+  }, [parallax, parallaxSpeed]);
 
-  // If parallax is true, we need to ensure the transform incorporates the custom property
-  const parallaxStyle = parallax ? { transform: 'translateY(var(--parallax-y, 0))' } : {};
+  // finite state easing
+  const ease = [0.22, 1, 0.36, 1];
+
+  // If stagger is true, we define transition for staggerChildren
+  const containerVariants = {
+    hidden: selectedVariant.hidden,
+    visible: {
+      ...selectedVariant.visible,
+      transition: {
+        duration,
+        delay: delay / 1000,
+        ease,
+        ...(stagger && { staggerChildren: 0.08, delayChildren: delay / 1000 })
+      }
+    }
+  };
+
+  // If stagger is used, the parent needs to orchestrate it. But wait, `ScrollReveal` might just wrap raw children. 
+  // To avoid breaking existing `sr-stagger` behavior (which targeted CSS child elements), 
+  // we will add the `sr-stagger` CSS class so existing CSS continues to stagger the children's transition delays
+  // if they use native CSS transitions internally.
+  const staggerClass = stagger ? 'sr-stagger' : '';
+  const combinedClassName = `${className} ${staggerClass} ${parallax ? 'tc-parallax-wrapper' : ''}`.trim();
+
+  const parallaxStyle = parallax ? { transform: `translateY(${parallaxY}px)` } : {};
 
   return (
-    <div ref={ref} className={`${className} ${parallax ? 'tc-parallax-wrapper' : ''}`} style={parallaxStyle}>
+    <motion.div
+      className={combinedClassName}
+      style={parallaxStyle}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, margin: "-50px" }}
+      variants={containerVariants}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }

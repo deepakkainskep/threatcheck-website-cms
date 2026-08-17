@@ -38,7 +38,7 @@ export default function Login() {
 
           <div className="loginHeaderGroup">
             <h1 className="loginTitle">Admin Panel</h1>
-            <p className="loginSubtitle">Platform staff sign-in</p>
+            {/* <p className="loginSubtitle">Platform staff sign-in</p> */}
           </div>
 
           {error && (
