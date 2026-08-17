@@ -8,9 +8,6 @@ import { User, Role } from "../types";
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [creating, setCreating] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "SUPERADMIN" as Role });
 
   const toast = useToast();
 
@@ -30,36 +27,7 @@ export default function Users() {
     loadUsers();
   }, []);
 
-  const handleCreateUser = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    if (!form.name.trim() || !form.email.trim() || !form.password.trim()) {
-      toast.error("Name, email, and password are required");
-      return;
-    }
-    if (form.password.length < 8) {
-      toast.error("Password must be at least 8 characters");
-      return;
-    }
-
-    setCreating(true);
-    try {
-      await api.post("/admin/users", {
-        name: form.name.trim(),
-        email: form.email.trim(),
-        password: form.password,
-        role: form.role,
-      });
-      toast.success(`Admin ${form.name} created successfully!`);
-      setForm({ name: "", email: "", password: "", role: "SUPERADMIN" });
-      setShowModal(false);
-      loadUsers();
-    } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to create admin");
-    } finally {
-      setCreating(false);
-    }
-  };
 
   return (
     <section>
@@ -68,10 +36,6 @@ export default function Users() {
           <h1>Admin Management</h1>
           <div className="pageHeadSub">Manage user accounts.</div>
         </div>
-        <button onClick={() => setShowModal(true)}>
-          <UserPlus size={16} />
-          Create User
-        </button>
       </div>
 
       {loading && (
@@ -125,57 +89,6 @@ export default function Users() {
         </div>
       )}
 
-      {/* Modal Form for Creating User */}
-      <Modal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        title="Create New Admin User"
-        maxWidth="500px"
-      >
-        <form onSubmit={handleCreateUser} style={{ display: "grid", gap: "16px" }}>
-          <div>
-            <label style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px", display: "block" }}>Full Name</label>
-            <input
-              placeholder="e.g. Sarah Connor"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              required
-            />
-          </div>
-
-          <div>
-            <label style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px", display: "block" }}>Email Address</label>
-            <input
-              type="email"
-              placeholder="sarah@threatcheck.local"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              required
-            />
-          </div>
-
-          <div>
-            <label style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px", display: "block" }}>Password (min 8 chars)</label>
-            <input
-              type="password"
-              placeholder="••••••••••••"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              required
-            />
-          </div>
-
-
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "12px" }}>
-            <button type="button" className="btnSecondary" onClick={() => setShowModal(false)}>
-              Cancel
-            </button>
-            <button type="submit" disabled={creating}>
-              {creating ? "Creating..." : "Create Account"}
-            </button>
-          </div>
-        </form>
-      </Modal>
     </section>
   );
 }
