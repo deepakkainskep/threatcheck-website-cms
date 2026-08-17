@@ -23,12 +23,12 @@ export default function RiskManagement() {
       {/* Supported Modules Grid */}
       <section className="risk-modules section-padding bg-secondary-theme">
         <div className="container">
-          <SectionHeader 
+          <SectionHeader
             badge="Risk Center"
             title="Comprehensive Risk Management"
             subtitle="Centralise, assess, and treat organisational risks with precision and automated intelligence."
           />
-          
+
           <div className="grid-3" style={{ gap: '1.5rem', marginTop: '3rem' }}>
             {[
               { title: 'Risk Register', desc: 'Centralised risk log with name, description, category, likelihood, impact, inherent and residual risk scores.' },
@@ -57,7 +57,7 @@ export default function RiskManagement() {
 
       {/* CTA */}
       <ScrollReveal variant="scale-up">
-        <CTA 
+        <CTA
           title="Prioritize threats based on actual risk"
           subtitle="Book a customized walkthrough to review your threat metrics."
         />

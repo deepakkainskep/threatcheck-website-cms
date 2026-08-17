@@ -23,21 +23,21 @@ export default function CaseStudiesList() {
       />
 
       <div className="container">
-      {loading ? (
-        <div style={{ padding: '4rem', textAlign: 'center' }}>Loading case studies...</div>
-      ) : (
-        <div className="grid-3 cs-grid">
-          {caseStudiesData && caseStudiesData.length > 0 ? (
-            caseStudiesData.map(study => (
-              <CaseStudyCard key={study._id} study={study} />
-            ))
-          ) : (
-            <div style={{ gridColumn: '1 / -1', padding: '2rem', textAlign: 'center', background: 'var(--bg-card)', borderRadius: 'var(--radius-lg)' }}>
-              No case studies available.
-            </div>
-          )}
-        </div>
-      )}
+        {loading ? (
+          <div style={{ padding: '4rem', textAlign: 'center' }}>Loading case studies...</div>
+        ) : (
+          <div className="grid-3 cs-grid">
+            {caseStudiesData && caseStudiesData.length > 0 ? (
+              caseStudiesData.map(study => (
+                <CaseStudyCard key={study._id} study={study} />
+              ))
+            ) : (
+              <div style={{ gridColumn: '1 / -1', padding: '2rem', textAlign: 'center', background: 'var(--bg-card)', borderRadius: 'var(--radius-lg)' }}>
+                No case studies available.
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <CTA

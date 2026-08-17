@@ -23,14 +23,14 @@ export default function ReportingAnalytics() {
       {/* Reporting Modules Grid */}
       <section className="reporting-modules section-padding bg-secondary-theme">
         <div className="container">
-          <SectionHeader 
+          <SectionHeader
             badge="Report Library"
             title="Comprehensive Reporting & Analytics"
             subtitle="Generate audit-ready evidence, gap analyses, and executive summaries instantly."
           />
-          
+
           <div className="grid-3" style={{ gap: '1.5rem', marginTop: '3rem' }}>
-            
+
             <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: 'var(--radius-lg)', background: 'var(--bg-card)', border: '1px solid var(--border-color-subtle)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
                 <FileText className="text-teal" size={20} />
@@ -176,7 +176,7 @@ export default function ReportingAnalytics() {
       </section>
 
       {/* CTA */}
-      <CTA 
+      <CTA
         title="Generate audit-ready evidence"
         subtitle="Schedule a walkthrough of our compliance reporting dashboards."
       />

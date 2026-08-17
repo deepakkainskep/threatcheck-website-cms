@@ -247,7 +247,7 @@ export default function Home() {
           <div className="hero-content">
             <span className="badge badge-primary hero-badge">Next-Gen Cyber Security</span>
             <h1 className="hero-title">
-              Security-Driven <span className="tc-gradient-text-anim">Compliance</span>.<br />
+              Security-Driven <span className="highlight-word">Compliance</span>.<br />
               Zero Audit Theater.
             </h1>
             <p className="hero-lead">
@@ -488,7 +488,7 @@ export default function Home() {
                     <div className="featured-cs-info">
                       <span className="badge badge-secondary">{study.industry}</span>
                       <h3>{study.title}</h3>
-                      
+
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <p className="featured-cs-desc">{study.challenge}</p>
                         <Link to={`/case-studies/${study._id}`} style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-primary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>

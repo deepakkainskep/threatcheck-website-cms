@@ -29,28 +29,28 @@ export default function InteractiveDashboard() {
             ].slice(-6));
             return 100;
           }
-          
+
           // Random scan logs during progress
           if (prev === 20) {
             setTelemetryLogs((logs) => [
-              ...logs, 
+              ...logs,
               { id: Date.now(), type: 'info', text: 'Auditing Identity & Access (IAM) permission matrices...' }
             ].slice(-6));
             setComplianceScore(78);
           } else if (prev === 50) {
             setTelemetryLogs((logs) => [
-              ...logs, 
+              ...logs,
               { id: Date.now(), type: 'success', text: 'Database encryption verified on all RDS databases.' }
             ].slice(-6));
             setComplianceScore(85);
           } else if (prev === 80) {
             setTelemetryLogs((logs) => [
-              ...logs, 
+              ...logs,
               { id: Date.now(), type: 'warning', text: 'Drift detected in AWS Security Group S3-Access-01. Resolving...' }
             ].slice(-6));
             setComplianceScore(92);
           }
-          
+
           return prev + 5;
         });
       }, 350);
@@ -103,7 +103,7 @@ export default function InteractiveDashboard() {
               <Shield size={14} /> NIST CSF
             </div>
           </div>
-          
+
           <div className="db-side-section">
             <span className="db-side-title">Systems</span>
             <div className="db-side-item"><Server size={14} /> AWS Production</div>
@@ -115,7 +115,7 @@ export default function InteractiveDashboard() {
         {/* Dashboard Main Console */}
         <main className="db-console">
           <div className="db-grid">
-            
+
             {/* Metric Card 1: Score */}
             <div className="db-card card-score">
               <h4 className="db-card-title">Compliance Score</h4>
@@ -124,11 +124,11 @@ export default function InteractiveDashboard() {
                   {/* Track Circle */}
                   <circle className="circle-track" cx="60" cy="60" r="50" />
                   {/* Radial progress circle */}
-                  <circle 
-                    className="circle-progress" 
-                    cx="60" 
-                    cy="60" 
-                    r="50" 
+                  <circle
+                    className="circle-progress"
+                    cx="60"
+                    cy="60"
+                    r="50"
                     style={{
                       strokeDasharray: '314.16',
                       strokeDashoffset: (314.16 * (100 - complianceScore)) / 100,
@@ -168,7 +168,7 @@ export default function InteractiveDashboard() {
                 </div>
               </div>
             </div>
-            
+
           </div>
 
           {/* Remediation Timeline Graph */}
@@ -183,12 +183,12 @@ export default function InteractiveDashboard() {
                 <line x1="0" y1="25" x2="450" y2="25" className="grid-line" />
                 <line x1="0" y1="50" x2="450" y2="50" className="grid-line" />
                 <line x1="0" y1="75" x2="450" y2="75" className="grid-line" />
-                
+
                 {/* SVG glowing graph path */}
-                <path 
-                  d="M0,90 Q45,70 90,85 T180,45 T270,30 T360,15 T450,8" 
-                  fill="none" 
-                  stroke="var(--color-primary)" 
+                <path
+                  d="M0,90 Q45,70 90,85 T180,45 T270,30 T360,15 T450,8"
+                  fill="none"
+                  stroke="var(--color-primary)"
                   strokeWidth="3"
                   className="graph-path"
                 />

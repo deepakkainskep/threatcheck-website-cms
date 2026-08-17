@@ -24,7 +24,7 @@ export default function ScannerDashboard() {
   return (
     <div className="tc-dashboard-layout">
       <CommandPalette />
-      
+
       {/* Background Effects */}
       <div className="tc-dashboard-bg">
         <div className="tc-glow-orb tc-orb-1" />
@@ -64,7 +64,7 @@ export default function ScannerDashboard() {
                 </ScrollReveal>
               </div>
             )}
-            
+
             <ScrollReveal variant="fade-up" delay={0.3}>
               <IntelligenceGraph />
             </ScrollReveal>
@@ -89,9 +89,9 @@ export default function ScannerDashboard() {
         </div>
       </div>
 
-      <ThreatDetailsDrawer 
-        threat={activeThreat} 
-        onClose={() => setActiveThreat(null)} 
+      <ThreatDetailsDrawer
+        threat={activeThreat}
+        onClose={() => setActiveThreat(null)}
       />
     </div>
   );

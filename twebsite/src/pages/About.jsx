@@ -63,7 +63,7 @@ export default function About() {
       {/* Core Values */}
       <section className="about-values section-padding bg-secondary-theme">
         <div className="container">
-          <SectionHeader 
+          <SectionHeader
             badge="01 / Core Values"
             title="The Principles That Drive ThreatCheck"
             subtitle="We hold ourselves to the same security standards we map for our customers."
@@ -114,7 +114,7 @@ export default function About() {
       {/* Leadership */}
       <section className="about-leadership section-padding bg-secondary-theme">
         <div className="container">
-          <SectionHeader 
+          <SectionHeader
             badge="03 / Leadership"
             title="Founded by Security and Compliance Engineers"
             subtitle="Our leadership team has scaled regulated software systems, verified audits, and defended enterprise perimeters."
@@ -140,7 +140,7 @@ export default function About() {
 
       {/* CTA */}
       <ScrollReveal variant="scale-up">
-        <CTA 
+        <CTA
           title="Ready to meet the ThreatCheck team?"
           subtitle="Schedule a technical discussion with our architects to evaluate your compliance roadmap."
         />

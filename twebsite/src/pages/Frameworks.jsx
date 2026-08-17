@@ -26,14 +26,14 @@ export default function Frameworks() {
       {/* Supported Modules Grid */}
       <section className="framework-modules section-padding bg-secondary-theme">
         <div className="container">
-          <SectionHeader 
+          <SectionHeader
             badge="Compliance Library"
             title="Comprehensive Framework Coverage"
             subtitle="Explore the detailed regulatory mapping available out-of-the-box with ThreatCheck."
           />
-          
+
           <div className="grid-3" style={{ gap: '1.5rem', marginTop: '3rem' }}>
-            
+
             {loading ? (
               <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', gridColumn: '1 / -1' }}>Loading frameworks...</div>
             ) : frameworksData.length > 0 ? (
@@ -42,7 +42,7 @@ export default function Frameworks() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
                     {(fw.logo || fw.image) ? (
                       <img src={fw.logo || fw.image} alt={fw.title || fw.name} style={{ width: '24px', height: '24px', objectFit: 'contain' }}
-                           onError={e => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+                        onError={e => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                     ) : (
                       <ShieldCheck className="text-teal" size={20} />
                     )}
@@ -64,7 +64,7 @@ export default function Frameworks() {
       </section>
 
       {/* CTA */}
-      <CTA 
+      <CTA
         title="Become always audit-ready"
         subtitle="Book a customized walkthrough of our framework mapping engine."
       />

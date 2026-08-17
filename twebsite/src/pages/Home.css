@@ -76,6 +76,9 @@
   .hero-content {
     align-items: center;
   }
+  .hero-actions {
+    justify-content: center;
+  }
 }
 
 .hero-badge {
@@ -163,6 +166,26 @@
   display: flex;
   justify-content: center;
 }
+
+/* Hide the dashboard panel on small phones — hero text/CTA takes priority */
+@media (max-width: 640px) {
+  .hero-visual {
+    display: none;
+  }
+}
+
+/* Scale down dashboard on medium tablets before it goes full width */
+@media (min-width: 641px) and (max-width: 992px) {
+  .hero-visual {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero-dashboard-wrapper {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+}
+
 
 /* Trust Banner */
 .trust-banner {

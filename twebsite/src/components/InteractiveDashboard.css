@@ -30,8 +30,13 @@
   letter-spacing: 0.02em;
 }
 
-.db-status .text-teal { color: var(--color-primary); }
-.db-status .text-success { color: #10b981; }
+.db-status .text-teal {
+  color: var(--color-primary);
+}
+
+.db-status .text-success {
+  color: #10b981;
+}
 
 .db-window-controls {
   display: flex;
@@ -43,9 +48,18 @@
   height: 10px;
   border-radius: 50%;
 }
-.dot-red { background: #ef4444; }
-.dot-yellow { background: #f59e0b; }
-.dot-green { background: #10b981; }
+
+.dot-red {
+  background: #ef4444;
+}
+
+.dot-yellow {
+  background: #f59e0b;
+}
+
+.dot-green {
+  background: #10b981;
+}
 
 .db-layout {
   display: flex;
@@ -212,9 +226,23 @@
   font-weight: 600;
 }
 
-.alert-badge.warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-.alert-badge.info { background: rgba(58, 134, 255, 0.15); color: #3a86ff; border: 1px solid rgba(58, 134, 255, 0.3); }
-.alert-badge.success { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.alert-badge.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.alert-badge.info {
+  background: rgba(58, 134, 255, 0.15);
+  color: #3a86ff;
+  border: 1px solid rgba(58, 134, 255, 0.3);
+}
+
+.alert-badge.success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
 
 .alert-stats {
   display: flex;
@@ -240,8 +268,13 @@
   letter-spacing: 0.05em;
 }
 
-.text-success { color: #10b981; }
-.text-warning { color: #f59e0b; }
+.text-success {
+  color: #10b981;
+}
+
+.text-warning {
+  color: #f59e0b;
+}
 
 /* Remediation Graph */
 .card-graph {
@@ -270,7 +303,10 @@
   height: 8px;
   border-radius: 50%;
 }
-.legend-dot.teal { background: var(--color-primary); }
+
+.legend-dot.teal {
+  background: var(--color-primary);
+}
 
 .graph-body {
   width: 100%;
@@ -295,9 +331,17 @@
 
 /* Animations */
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .pulse-icon {
@@ -309,8 +353,13 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 576px) {
@@ -320,14 +369,60 @@
 }
 
 /* Premium animation upgrades for dashboard */
-.graph-path { stroke-dasharray: 800; stroke-dashoffset: 800; animation: tc-draw-line 2s var(--ease-out-expo) 0.5s forwards; }
-.circle-progress { transition: stroke-dashoffset 1.2s var(--ease-out-expo); }
-.log-line { animation: tc-fade-right 0.4s var(--ease-out-expo) both; }
-.db-card { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
-.db-card:hover { box-shadow: 0 0 0 1px rgba(103,2,186,0.2), 0 8px 24px rgba(103,2,186,0.08); border-color: rgba(103,2,186,0.25); }
-.score-num { animation: tc-scale-in 0.6s var(--ease-out-back) 1s both; }
-.db-header { border-bottom: 1px solid rgba(103,2,186,0.15); }
-.pulse-icon { animation: tc-dot-ping 1.5s ease-in-out infinite; color: var(--green-400); }
-.spin-icon { animation: tc-spin-slow 3s linear infinite; }
-@keyframes pulse-scale { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.1); opacity:0.85; } }
-.alert-badge.warning { animation: pulse-scale 2s ease-in-out infinite; }
+.graph-path {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: tc-draw-line 2s var(--ease-out-expo) 0.5s forwards;
+}
+
+.circle-progress {
+  transition: stroke-dashoffset 1.2s var(--ease-out-expo);
+}
+
+.log-line {
+  animation: tc-fade-right 0.4s var(--ease-out-expo) both;
+}
+
+.db-card {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.db-card:hover {
+  box-shadow: 0 0 0 1px rgba(103, 2, 186, 0.2), 0 8px 24px rgba(103, 2, 186, 0.08);
+  border-color: rgba(103, 2, 186, 0.25);
+}
+
+.score-num {
+  animation: tc-scale-in 0.6s var(--ease-out-back) 1s both;
+}
+
+.db-header {
+  border-bottom: 1px solid rgba(103, 2, 186, 0.15);
+}
+
+.pulse-icon {
+  animation: tc-dot-ping 1.5s ease-in-out infinite;
+  color: var(--green-400);
+}
+
+.spin-icon {
+  animation: tc-spin-slow 3s linear infinite;
+}
+
+@keyframes pulse-scale {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+}
+
+.alert-badge.warning {
+  animation: pulse-scale 2s ease-in-out infinite;
+}

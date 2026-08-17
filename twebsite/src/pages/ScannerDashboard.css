@@ -22,19 +22,19 @@
 }
 
 .tc-orb-1 {
-  width: 600px;
-  height: 600px;
+  width: clamp(400px, 40vw, 600px);
+  height: clamp(400px, 40vw, 600px);
   background: var(--brand-royal-purple);
-  top: -100px;
-  left: -200px;
+  top: -10vw;
+  left: -15vw;
 }
 
 .tc-orb-2 {
-  width: 500px;
-  height: 500px;
+  width: clamp(300px, 30vw, 500px);
+  height: clamp(300px, 30vw, 500px);
   background: var(--blue-500);
   bottom: 20%;
-  right: -100px;
+  right: -10vw;
 }
 
 .tc-grid-overlay {
@@ -62,7 +62,7 @@
 }
 
 .tc-dashboard-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.5rem;

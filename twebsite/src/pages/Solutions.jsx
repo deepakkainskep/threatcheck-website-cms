@@ -103,7 +103,7 @@ export default function Solutions() {
               <span className="sol-metric-num">{solution.metric}</span>
               <span className="sol-metric-lbl">{solution.metricLabel}</span>
             </div>
-            
+
             <div className="solution-checkpoints-card glass-panel">
               <h4 className="checkpoints-title"><PageIcon size={16} /> Solution Capabilities</h4>
               <ul className="checkpoints-list">
@@ -116,7 +116,7 @@ export default function Solutions() {
 
           <div className="breakdown-details text-left">
             <h2 className="gradient-text">How We Solve The Challenge</h2>
-            
+
             <div className="solution-points-list">
               {solution.points.map((pt, idx) => {
                 const parts = pt.split('**');
@@ -141,7 +141,7 @@ export default function Solutions() {
         </div>
       </section>
 
-      <CTA 
+      <CTA
         title={solution.ctaTitle}
         subtitle="Book a customized walktrough with our security architects to evaluate your compliance timeline."
       />

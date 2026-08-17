@@ -25,11 +25,11 @@ export default function Automation() {
       {/* Grid Capability Detail */}
       <section className="pf-details-section section-padding bg-secondary-theme">
         <div className="container pf-grid">
-          
+
           <ScrollReveal variant="fade-right" className="pf-text">
             <h2 className="gradient-text">API-driven Posture Correction</h2>
             <p>Don't rely solely on manual ticketing. Configure automated rules to resolve simple configuration drifts immediately.</p>
-            
+
             <ul className="pf-list">
               <li>
                 <Check size={18} />
@@ -70,7 +70,7 @@ export default function Automation() {
 
       {/* CTA */}
       <ScrollReveal variant="scale-up">
-        <CTA 
+        <CTA
           title="Automate your posture defense"
           subtitle="Book a walkthrough of our webhook remediation engine."
         />

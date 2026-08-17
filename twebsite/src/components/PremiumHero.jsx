@@ -15,10 +15,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   }
 };
 
@@ -32,6 +32,16 @@ export default function PremiumHero({
   secondaryButtonText,
   secondaryButtonLink
 }) {
+  // Helper to wrap each word in the gradient class
+  const renderGradientWords = (text) => {
+    if (typeof text !== 'string') return text;
+    return text.split(' ').map((word, i) => (
+      <span key={i} className="highlight-word">
+        {word}{' '}
+      </span>
+    ));
+  };
+
   return (
     <section className="premium-hero-section">
       <div className="premium-hero-bg">
@@ -40,8 +50,8 @@ export default function PremiumHero({
         <div className="premium-hero-glow"></div>
         <div className="premium-hero-glow premium-hero-glow-secondary"></div>
       </div>
-      
-      <motion.div 
+
+      <motion.div
         className="container premium-hero-content"
         variants={containerVariants}
         initial="hidden"
@@ -52,12 +62,10 @@ export default function PremiumHero({
         </motion.div>
 
         <motion.h1 variants={itemVariants} className="premium-hero-title">
-          <span className="title-line-1 d-block">
-            {titleLine1}
-          </span>
+          <span className="title-line-1">{titleLine1}</span>
           {titleLine2 && (
-            <span className="title-line-2 d-block">
-              {titleLine2}
+            <span className="title-line-2">
+              {renderGradientWords(titleLine2)}
             </span>
           )}
         </motion.h1>

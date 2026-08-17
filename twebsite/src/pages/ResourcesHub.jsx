@@ -45,10 +45,10 @@ export default function ResourcesHub() {
 
   const filteredResources = resourcesData.filter(item => {
     const itemType = (item.type || '').toLowerCase();
-    
+
     const matchesCat = activeCategory === 'all' || itemType === activeCategory;
-    const matchesSearch = (item.title || item.name || '').toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (item.excerpt || item.description || '').toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = (item.title || item.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.excerpt || item.description || '').toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCat && matchesSearch;
   });
 
@@ -73,75 +73,75 @@ export default function ResourcesHub() {
       />
 
       <div className="container">
-      {/* Filter and Search Panel */}
-      <div className="shared-search-controls">
-        <div className="search-wrapper">
-          <Search size={16} className="search-icon" />
-          <input 
-            type="text" 
-            placeholder="Search checklists, guides, whitepapers..." 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="form-control search-input"
-          />
-        </div>
-
-        <div className="category-filters">
-          {categories.map((cat) => (
-            <button 
-              key={cat.id} 
-              type="button" 
-              className={`filter-btn ${activeCategory === cat.id ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat.id)}
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Resources Grid */}
-      <div className="resources-grid">
-        {loading ? (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', gridColumn: '1 / -1' }}>Loading resources...</div>
-        ) : filteredResources.length > 0 ? (
-          filteredResources.map((item) => (
-            <ResourceCard key={item._id} resource={item} />
-          ))
-        ) : (
-          <div className="no-results-banner glass-panel" style={{ gridColumn: '1 / -1' }}>
-            <p>No resources found matching your search query.</p>
+        {/* Filter and Search Panel */}
+        <div className="shared-search-controls">
+          <div className="search-wrapper">
+            <Search size={16} className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search checklists, guides, whitepapers..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="form-control search-input"
+            />
           </div>
-        )}
-      </div>
 
-      {/* FAQ Accordion Section */}
-      <section className="faq-section section-padding">
-        <SectionHeader 
-          badge="FAQs"
-          title="Frequently Answered Questions"
-          subtitle="Learn more about continuous compliance automation, cloud posture configurations, and auditor mappings."
-        />
-
-        <div className="faq-list">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="faq-item glass-panel">
-              <button 
-                type="button" 
-                className="faq-question-btn" 
-                onClick={() => toggleFaq(idx)}
+          <div className="category-filters">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                className={`filter-btn ${activeCategory === cat.id ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
               >
-                <span>{faq.q}</span>
-                {openFaq === idx ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                {cat.name}
               </button>
-              
-              <div className={`faq-answer-wrapper ${openFaq === idx ? 'open' : ''}`}>
-                <p className="faq-answer">{faq.a}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
+
+        {/* Resources Grid */}
+        <div className="resources-grid">
+          {loading ? (
+            <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', gridColumn: '1 / -1' }}>Loading resources...</div>
+          ) : filteredResources.length > 0 ? (
+            filteredResources.map((item) => (
+              <ResourceCard key={item._id} resource={item} />
+            ))
+          ) : (
+            <div className="no-results-banner glass-panel" style={{ gridColumn: '1 / -1' }}>
+              <p>No resources found matching your search query.</p>
+            </div>
+          )}
+        </div>
+
+        {/* FAQ Accordion Section */}
+        <section className="faq-section section-padding">
+          <SectionHeader
+            badge="FAQs"
+            title="Frequently Answered Questions"
+            subtitle="Learn more about continuous compliance automation, cloud posture configurations, and auditor mappings."
+          />
+
+          <div className="faq-list">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="faq-item glass-panel">
+                <button
+                  type="button"
+                  className="faq-question-btn"
+                  onClick={() => toggleFaq(idx)}
+                >
+                  <span>{faq.q}</span>
+                  {openFaq === idx ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </button>
+
+                <div className={`faq-answer-wrapper ${openFaq === idx ? 'open' : ''}`}>
+                  <p className="faq-answer">{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
 
       {/* Final CTA */}
