@@ -159,6 +159,19 @@ export default function ContentPage({ type }: { type: string }) {
     }
   };
 
+  /** Called from an edit-draft card: takes the original published doc offline
+   *  (removes it from the website) while keeping the draft for future publishing. */
+  const handleUnpublishOriginal = async (item: ContentItem) => {
+    if (!window.confirm(`Take "${item.title || item.name}" offline? The live version will be removed from the website. Your draft will be kept so you can publish it later.`)) return;
+    try {
+      await api.patch(`/admin/${type}/${item._id}/unpublish`);
+      toast.success(`Removed from website. Draft is still available here.`);
+      loadItems();
+    } catch {
+      toast.error("Failed to take item offline");
+    }
+  };
+
   const isArticle = ["blogs", "insights"].includes(type);
   const isResource = type === "resources";
   const isCase = type === "case-studies";
@@ -263,25 +276,61 @@ export default function ContentPage({ type }: { type: string }) {
           {items.map((x) => {
             const mediaSrc = getMediaUrl(x.image || x.logo);
             return (
-              <article className="contentCard" key={x._id}>
+              <article className="contentCard" key={x._id} style={(x as any).isSnapshot ? { opacity: 0.85, border: '1.5px dashed #f59e0b' } : undefined}>
                 <CardMedia
                   src={mediaSrc || undefined}
                   alt={x.title || x.name || "Cover image"}
-                  badge={<span className={`badge ${x.status} cardBadge`}>{x.status}</span>}
+                  badge={
+                    (x as any).isSnapshot
+                      ? <span className="cardBadge" style={{ background: '#f59e0b', color: '#fff', borderRadius: '6px', padding: '2px 8px', fontSize: '11px', fontWeight: 700 }}>PREVIOUS VERSION</span>
+                      : <span className={`badge ${x.status} cardBadge`}>{x.status}</span>
+                  }
                 />
                 <div className="cardBody">
                   {x.category && <div className="cardCategory">{x.category}</div>}
                   <h3 className="cardTitle">{x.title || x.name}</h3>
                   <div className="cardExcerpt">{x.excerpt || x.description || "No description provided."}</div>
+                  {(x as any).isSnapshot && (
+                    <div style={{ fontSize: '11px', color: '#f59e0b', marginTop: '6px', fontWeight: 600 }}>📷 Snapshot of previous published content</div>
+                  )}
                 </div>
                 <div className="cardFooter">
                   <div className="cardActions">
-                    <button className="btnSecondary" style={{ padding: "6px 12px" }} onClick={() => { setEditItem(x); setActiveTab("general"); }}>
-                      <Edit2 size={14} /> Edit
-                    </button>
-                    <button className="btnSecondary" style={{ padding: "6px 12px" }} onClick={() => handleTogglePublish(x)}>
-                      {x.status === "PUBLISHED" ? <EyeOff size={14} /> : <Globe size={14} />}
-                    </button>
+                    {!(x as any).isSnapshot && (
+                      <button className="btnSecondary" style={{ padding: "6px 12px" }} onClick={() => { setEditItem(x); setActiveTab("general"); }}>
+                        <Edit2 size={14} /> Edit
+                      </button>
+                    )}
+                    {/* Edit draft that has a live original: show Publish + Take Offline */}
+                    {!(x as any).isSnapshot && x.status === "DRAFT" && (x as any).originalId && (
+                      <>
+                        <button
+                          className="btnSecondary"
+                          style={{ padding: "6px 12px" }}
+                          title="Publish this draft — replaces the live version"
+                          onClick={() => handleTogglePublish(x)}
+                        >
+                          <Globe size={14} />
+                        </button>
+                        <button
+                          className="btnSecondary"
+                          style={{ padding: "6px 12px", color: '#ef4444', borderColor: '#ef4444' }}
+                          title="Remove current live version from website (keeps this draft)"
+                          onClick={() => handleUnpublishOriginal(x)}
+                        >
+                          <EyeOff size={14} />
+                        </button>
+                      </>
+                    )}
+                    {/* Regular published item or standalone draft */}
+                    {!(x as any).isSnapshot && !(x.status === "DRAFT" && (x as any).originalId) && (
+                      <button className="btnSecondary" style={{ padding: "6px 12px" }} onClick={() => handleTogglePublish(x)}>
+                        {x.status === "PUBLISHED" ? <EyeOff size={14} /> : <Globe size={14} />}
+                      </button>
+                    )}
+                    {(x as any).isSnapshot && (
+                      <span style={{ fontSize: '12px', color: 'var(--text-muted)', padding: '6px 4px' }}>Read-only snapshot</span>
+                    )}
                   </div>
                   <button className="btnDanger" style={{ padding: "6px 10px" }} onClick={() => setDeleteTarget(x)}>
                     <Trash2 size={14} />
@@ -307,18 +356,51 @@ export default function ContentPage({ type }: { type: string }) {
             </thead>
             <tbody>
               {items.map((x) => (
-                <tr key={x._id}>
-                  <td className="tableTitle">{x.title || x.name}</td>
+                <tr key={x._id} style={(x as any).isSnapshot ? { background: 'rgba(245,158,11,0.06)', borderLeft: '3px solid #f59e0b' } : undefined}>
+                  <td className="tableTitle">
+                    {x.title || x.name}
+                    {(x as any).isSnapshot && <span style={{ marginLeft: '8px', fontSize: '11px', color: '#f59e0b', fontWeight: 700 }}>📷 PREV</span>}
+                  </td>
                   <td>{x.category || "-"}</td>
-                  <td><span className={`badge ${x.status}`}>{x.status}</span></td>
+                  <td>
+                    {(x as any).isSnapshot
+                      ? <span className="badge" style={{ background: '#f59e0b', color: '#fff' }}>PREVIOUS VERSION</span>
+                      : <span className={`badge ${x.status}`}>{x.status}</span>}
+                  </td>
                   <td>
                     <div style={{ display: "flex", gap: "8px" }}>
-                      <button className="btnSecondary" style={{ padding: "4px 10px" }} onClick={() => { setEditItem(x); setActiveTab("general"); }}>
-                        <Edit2 size={14} /> Edit
-                      </button>
-                      <button className="btnSecondary" style={{ padding: "4px 10px" }} onClick={() => handleTogglePublish(x)}>
-                        {x.status === "PUBLISHED" ? "Unpublish" : "Publish"}
-                      </button>
+                      {!(x as any).isSnapshot && (
+                        <button className="btnSecondary" style={{ padding: "4px 10px" }} onClick={() => { setEditItem(x); setActiveTab("general"); }}>
+                          <Edit2 size={14} /> Edit
+                        </button>
+                      )}
+                      {/* Edit draft linked to a live original */}
+                      {!(x as any).isSnapshot && x.status === "DRAFT" && (x as any).originalId && (
+                        <>
+                          <button
+                            className="btnSecondary"
+                            style={{ padding: "4px 10px" }}
+                            title="Publish — replace live version"
+                            onClick={() => handleTogglePublish(x)}
+                          >
+                            Publish
+                          </button>
+                          <button
+                            className="btnSecondary"
+                            style={{ padding: "4px 10px", color: '#ef4444', borderColor: '#ef4444' }}
+                            title="Remove live version from website"
+                            onClick={() => handleUnpublishOriginal(x)}
+                          >
+                            Take Offline
+                          </button>
+                        </>
+                      )}
+                      {/* Standard published or standalone draft */}
+                      {!(x as any).isSnapshot && !(x.status === "DRAFT" && (x as any).originalId) && (
+                        <button className="btnSecondary" style={{ padding: "4px 10px" }} onClick={() => handleTogglePublish(x)}>
+                          {x.status === "PUBLISHED" ? "Unpublish" : "Publish"}
+                        </button>
+                      )}
                       <button className="btnDanger" style={{ padding: "4px 8px" }} onClick={() => setDeleteTarget(x)}>
                         <Trash2 size={14} />
                       </button>

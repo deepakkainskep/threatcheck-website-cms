@@ -55,6 +55,9 @@ export function adminRoutes(model: Model<any>, entity: string, schema: any) {
       // Hide published originals that currently have a pending draft
       q.hasDraft = { $ne: true };
 
+      // Never show snapshot drafts in the admin list (they are internal only)
+      q.isSnapshot = { $ne: true };
+
       if (req.query.status) q.status = req.query.status;
       if (req.query.category) q.category = req.query.category;
       if (req.query.search) {
@@ -170,14 +173,34 @@ export function adminRoutes(model: Model<any>, entity: string, schema: any) {
         if (!existing) throw new AppError(404, "Not found");
 
         if (existing.status === "PUBLISHED") {
-          // Check if a draft already exists for this published item
+          // Only look for the edit draft (not a snapshot) to avoid updating snapshot copies
           let draft = await model.findOne({
             originalId: String(existing._id),
             status: "DRAFT",
+            isSnapshot: { $ne: true },
           });
 
           if (!draft) {
-            // Create a new draft copy from the published item
+            // ── Step 1: Create a SNAPSHOT of the current published content ──
+            // This lets the admin see/access the previous version from the CMS Draft list.
+            const snapshotExists = await model.findOne({
+              originalId: String(existing._id),
+              status: "DRAFT",
+              isSnapshot: true,
+            });
+            if (!snapshotExists) {
+              const snapshotData: any = existing.toObject();
+              delete snapshotData._id;
+              delete snapshotData.createdAt;
+              delete snapshotData.updatedAt;
+              snapshotData.status = "DRAFT";
+              snapshotData.originalId = String(existing._id);
+              snapshotData.hasDraft = false;
+              snapshotData.isSnapshot = true;
+              await model.create(snapshotData);
+            }
+
+            // ── Step 2: Create the edit draft with the new changes ──
             const copyData: any = existing.toObject();
             delete copyData._id;
             delete copyData.createdAt;
@@ -190,6 +213,7 @@ export function adminRoutes(model: Model<any>, entity: string, schema: any) {
             copyData.status = "DRAFT";
             copyData.originalId = String(existing._id);
             copyData.hasDraft = false;
+            copyData.isSnapshot = false;
 
             draft = await model.create(copyData);
 
@@ -197,7 +221,7 @@ export function adminRoutes(model: Model<any>, entity: string, schema: any) {
             existing.hasDraft = true;
             await existing.save();
           } else {
-            // Update the existing draft in-place (don't create another copy)
+            // Update the existing edit draft in-place (don't create another copy)
             for (const key in req.body) {
               draft.set(key, req.body[key]);
             }
@@ -277,8 +301,13 @@ export function adminRoutes(model: Model<any>, entity: string, schema: any) {
               original.publishedAt = new Date();
 
               const savedOriginal = await original.save();
-              // Clean up the draft document
+              // Clean up: delete this edit draft AND any snapshot draft for the same original
               await document.deleteOne();
+              await model.deleteMany({
+                originalId: String(original._id),
+                status: "DRAFT",
+                isSnapshot: true,
+              });
 
               await audit(req, `published ${entity}`, entity, String(savedOriginal._id));
               return ok(res, savedOriginal);
@@ -293,30 +322,57 @@ export function adminRoutes(model: Model<any>, entity: string, schema: any) {
               return ok(res, saved);
             }
           } else {
-            // Publishing a first-time standalone draft
+            // Publishing a first-time standalone draft (or a previous-version draft after Take Offline)
             document.status = "PUBLISHED";
             document.publishedAt = new Date();
+            document.hasDraft = false;
+            document.isSnapshot = false;
             const saved = await document.save();
+
+            // If any edit drafts exist that point to this document as their original,
+            // re-hide the original from the admin list (hasDraft = true) since there are still pending changes
+            const linkedDraft = await model.findOne({
+              originalId: String(document._id),
+              status: "DRAFT",
+              isSnapshot: { $ne: true },
+            });
+            if (linkedDraft) {
+              document.hasDraft = true;
+              await document.save();
+            }
+
             await audit(req, `published ${entity}`, entity, String(saved._id));
             return ok(res, saved);
           }
         } else {
           // UNPUBLISH
           if (document.originalId) {
-            // If somehow a draft is being unpublished, unpublish its original instead
+            // This is an edit draft — take its original published document offline
+            // but KEEP the edit draft so the admin can still publish it later.
             const original = await model.findById(document.originalId);
             if (original) {
+              // Take the original published document OFFLINE (becomes DRAFT).
+              // The edit draft is KEPT so the admin can:
+              //   a) Publish the original again (restore previous content)
+              //   b) Publish the edit draft (go live with new changes)
               original.status = "DRAFT";
-              original.hasDraft = false;
+              original.hasDraft = false; // make it visible in the admin list
               (original as any).publishedAt = undefined;
-              const saved = await original.save();
-              await document.deleteOne();
-              await audit(req, `unpublished ${entity}`, entity, String(saved._id));
-              return ok(res, saved);
+              await original.save();
+
+              // Delete snapshot drafts (they're no longer needed)
+              await model.deleteMany({
+                originalId: String(original._id),
+                isSnapshot: true,
+              });
+
+              await audit(req, `unpublished ${entity} (original offline, edit draft retained)`, entity, String(original._id));
+              return ok(res, original);
             }
           }
 
-          // Standard unpublish: revert to DRAFT, remove any pending draft copies
+          // Standard unpublish of a top-level published document:
+          // revert to DRAFT and remove any pending draft/snapshot copies
           document.status = "DRAFT";
           (document as any).publishedAt = undefined;
           document.hasDraft = false;

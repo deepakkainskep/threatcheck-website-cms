@@ -6,6 +6,7 @@ export const statusValues = ["DRAFT", "PUBLISHED"] as const;
 export const versioningFields = {
   originalId: { type: String, default: null },
   hasDraft: { type: Boolean, default: false },
+  isSnapshot: { type: Boolean, default: false },
 };
 export const seoSchema = new Schema(
   {
