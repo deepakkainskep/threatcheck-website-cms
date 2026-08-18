@@ -4,8 +4,10 @@ import './ThemeToggle.css';
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
+      // 1. Use previously saved preference if exists
       const saved = localStorage.getItem('threatcheck-theme');
-      if (saved) return saved;
+      if (saved === 'light' || saved === 'dark') return saved;
+      // 2. Otherwise follow the system/OS preference automatically
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return 'light';
