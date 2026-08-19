@@ -22,6 +22,9 @@ import {
   contactSubmission,
 } from "../validators/schemas.js";
 const r = Router();
+r.get("/health", (req, res) =>
+  res.json({ success: true, data: { status: "ok", timestamp: new Date().toISOString() } }),
+);
 r.use("/auth", auth);
 r.use("/public/blogs", publicRoutes(Blog));
 r.use("/public/insights", publicRoutes(Insight));
