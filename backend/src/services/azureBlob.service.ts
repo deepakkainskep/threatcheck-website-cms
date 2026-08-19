@@ -52,7 +52,7 @@ function getContainerClient(): Promise<ContainerClient> {
       const containerClient = blobServiceClient.getContainerClient(
         azureStorageContainerName,
       );
-      await containerClient.createIfNotExists();
+      await containerClient.createIfNotExists({ access: "blob" });
       console.log(
         `[AzureBlob] ✅ Container client ready → container="${azureStorageContainerName}"`,
       );
