@@ -5,9 +5,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0',
-    port: 8080,
-    allowedHosts: [
-      'threatheck-cph7dhbqcghxbgct.canadacentral-01.azurewebsites.net',
-    ],
+    port: process.env.PORT ? parseInt(process.env.PORT) : 5174,
+    allowedHosts: true,
+    strictPort: true,
   },
 })
